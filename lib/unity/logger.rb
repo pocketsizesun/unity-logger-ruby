@@ -14,7 +14,7 @@ module Unity
       @logger = ::Logger.new(*args)
       @local_hostname = Socket.gethostname
       @source = Unity.respond_to?(:application) ? Unity.application&.name : nil
-      @logger.formatter = proc do |severity, datetime, progname, msg|
+      @logger.formatter = proc do |severity, datetime, progname, arg|
         JSON.dump(
           {
             '@severity' => severity,
@@ -22,7 +22,7 @@ module Unity
             '@hostname' => @local_hostname,
             '@source' => @source
           }.merge(
-            msg.is_a?(Hash) ? row : { 'message' => msg.to_s }
+            arg.is_a?(Hash) ? arg : { 'message' => arg.to_s }
           )
         ) + "\n"
       end
