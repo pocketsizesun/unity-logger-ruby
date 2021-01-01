@@ -13,7 +13,7 @@ module Unity
     def initialize(*args)
       @logger = ::Logger.new(*args)
       @local_hostname = Socket.gethostname
-      @source = Unity.respond_to?(:application) ? Unity.application&.name : nil
+      @source = nil
       @logger.formatter = proc do |severity, datetime, progname, arg|
         JSON.dump(
           {
