@@ -10,6 +10,12 @@ module Unity
   class Logger
     attr_reader :source
 
+    DEBUG  = 0
+    INFO   = 1
+    WARN   = 2
+    ERROR  = 3
+    FATAL  = 4
+
     def initialize(*args)
       @logger = ::Logger.new(*args)
       @local_hostname = Socket.gethostname
