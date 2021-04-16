@@ -1,11 +1,13 @@
 PATH
   remote: .
   specs:
-    unity-logger (1.0.0)
+    unity-logger (1.1.0)
+      oj (~> 3.11)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    oj (3.11.5)
     rake (12.3.3)
 
 PLATFORMS
@@ -16,4 +18,4 @@ DEPENDENCIES
   unity-logger!
 
 BUNDLED WITH
-   2.1.4
+   2.2.3

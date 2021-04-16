@@ -3,7 +3,7 @@
 require 'logger'
 require 'socket'
 require 'time'
-require 'json'
+require 'oj'
 require "unity/logger/version"
 
 module Unity
@@ -21,7 +21,7 @@ module Unity
       @local_hostname = Socket.gethostname
       @source = nil
       @logger.formatter = proc do |severity, datetime, progname, arg|
-        JSON.dump(
+        Oj.dump(
           {
             '@severity' => severity,
             '@date' => datetime.utc.iso8601,
