@@ -29,7 +29,8 @@ module Unity
             '@source' => @source
           }.merge(
             arg.is_a?(Hash) ? arg : { 'message' => arg.to_s }
-          )
+          ),
+          mode: :null
         ) + "\n"
       end
     end
