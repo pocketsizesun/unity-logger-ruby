@@ -1,4 +1,4 @@
-require_relative 'lib/unity/logger/version'
+require_relative 'lib/unity/logger'
 
 Gem::Specification.new do |spec|
   spec.name          = "unity-logger"
@@ -23,6 +23,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.add_dependency 'oj', '~> 3.11'
 end

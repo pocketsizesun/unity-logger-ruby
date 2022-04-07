@@ -3,12 +3,13 @@
 require 'logger'
 require 'socket'
 require 'time'
-require 'oj'
-require 'unity/logger/version'
+require 'json'
 
 module Unity
-  class Logger
+  class Logger < ::Logger
     attr_reader :source, :orig_logger
+
+    VERSION = '1.3.0'
 
     DEBUG  = 0
     INFO   = 1
@@ -19,9 +20,10 @@ module Unity
     def initialize(*args, **kwargs)
       @source = kwargs.delete(:source)
       @local_hostname = kwargs.delete(:hostname) || Socket.gethostname
-      @orig_logger = ::Logger.new(*args, **kwargs)
-      @orig_logger.formatter = proc do |severity, datetime, progname, arg|
-        Oj.dump(
+      super(*args, **kwargs)
+
+      self.formatter = proc do |severity, datetime, progname, arg|
+        JSON.fast_generate(
           {
             '@severity' => severity,
             '@date' => datetime.utc.iso8601,
@@ -37,10 +39,6 @@ module Unity
 
     def source=(arg)
       @source = arg.to_s
-    end
-
-    def method_missing(method_name, *args, &block)
-      @orig_logger.__send__(method_name, *args, &block)
     end
   end
 end
